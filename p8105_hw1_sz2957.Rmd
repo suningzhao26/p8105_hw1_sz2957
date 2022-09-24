@@ -5,5 +5,85 @@ Date: September 2022
 output: github_document
 ---
 
+# Problem 1
+##### Download the package containing the penguins dataset and load:
+
+```{r}
+# Set echo = TRUE as default
+knitr::opts_chunk$set(echo = TRUE)
+# Open the library of tidyverse
+library(tidyverse)
+# Load the datafile
+data("penguins", package = "palmerpenguins")
+# Demonstrate the dataset
+head(penguins)
+
+```
+
+##### Write a short description of penguins dataset
+
+In _penguins_ dataset, there are 8 variables, including species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex and year.
+
+The size of _penguins_ is `r nrow(penguins)` rows and `r ncol(penguins)` lines.
+
+The mean flipper length is `r mean(pull(penguins, flipper_length_mm), na.rm=TRUE)`mm.
+
+
+##### Make a scatterplot
+
+```{r}
+ggplot(penguins,aes(y = flipper_length_mm, x = bill_length_mm, color = species)) + geom_point()
+
+ggsave("scatter_plot.pdf", height = 4, width = 6)
+
+```
+
+# Problem 2
+
+##### Create a data frame
+
+```{r}
+problem2_df = tibble(
+# A random sample of size 10 from a standard Normal distribution
+   vec_sample = rnorm (10),
+# A logical vector indicating whether elements of the sample are greater than 0
+   vec_logical = vec_sample > 0,
+# A character vector of length 10
+   vec_char = c("0", "1", "2", "3", "4","5", "6", "7", "8", "9"),
+# a factor vector of length 10, with 3 different factor levels
+   vec_factor = factor(c("High", "Low", "Medium", "High", "Low", "Medium","High", "Low", "Medium","Low"))
+)
+# Check the tibble:
+problem2_df
+```
+
+##### Try to take the mean of each variable in the dataframe
+
+```{r}
+# Mean of vec_sample:
+mean(pull(problem2_df, vec_sample))
+# Mean of vec_logical:
+mean(pull(problem2_df, vec_logical))
+# Mean of vec_char:
+mean(pull(problem2_df, vec_char))
+# Mean of vec_char:
+mean(pull(problem2_df, vec_factor))
+```
+
+##### Applies as.numeric function to the logical, characther and factor variables
+```{r, eval=FALSE}
+# Apply for vec_logical and compute mean
+   numeric_logical = as.numeric(problem2_df$vec_logical)
+# Apply for vec_char and compute mean
+   numeric_char = as.numeric(problem2_df$vec_char)
+# Apply for vec_factor and compute mean
+   numeric_factor = as.numeric(problem2_df$vec_factor)  
+# Mean of vec_logical:
+   mean(numeric_logical)
+# Mean of vec_char:
+   mean(numeric_char)
+# Mean of vec_char:
+   mean(numeric_factor)
+```
 
 
