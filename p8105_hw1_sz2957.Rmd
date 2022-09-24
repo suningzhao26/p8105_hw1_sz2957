@@ -1,0 +1,9 @@
+---
+title: "Homework 1"
+author: Suning Zhao
+Date: September 2022
+output: github_document
+---
+
+
+
