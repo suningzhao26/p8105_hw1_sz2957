@@ -17,16 +17,27 @@ library(tidyverse)
 data("penguins", package = "palmerpenguins")
 # Demonstrate the dataset
 head(penguins)
-
+# Compute row, column and mean flipper length
+row_penguins = nrow(penguins)
+col_penguins = ncol(penguins)
+mean_flipper_length = mean(pull(penguins, flipper_length_mm), na.rm = TRUE)
+# Compute mean for bill_length_mm, bill_depth_mm
+mean_bill_length_mm = mean(pull(penguins, bill_length_mm), na.rm = TRUE)
+mean_bill_depth_mm = mean(pull(penguins, bill_depth_mm), na.rm = TRUE)
+# Compute mean for body_mass_g, year
+mean_body_mass_g = mean(pull(penguins, body_mass_g), na.rm = TRUE)
+mean_year = mean(pull(penguins, year), na.rm = TRUE)
 ```
 
 ##### Write a short description of penguins dataset
 
-In _penguins_ dataset, there are 8 variables, including species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex and year.
+*   In _penguins_ dataset, there are 8 variables, including species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex and year. Sex is a factor vectors including 2 different values. Species and island are two factor vectors including 3 different values. Bill_length_mm(mean `r mean_bill_length_mm`), bill_depth_mm(mean `r mean_bill_depth_mm`) are two numeric variables. Flipper_length_mm(mean `r  mean_flipper_length`), body_mass_g(mean `r mean_body_mass_g`) and year(mean `r mean_year`) are three int variables.
 
-The size of _penguins_ is `r nrow(penguins)` rows and `r ncol(penguins)` lines.
 
-The mean flipper length is `r mean(pull(penguins, flipper_length_mm), na.rm=TRUE)`mm.
+*   The size of _penguins_ is `r row_penguins` rows and `r col_penguins` lines.
+
+*   The mean _flipper_ _length_ is `r mean_flipper_length`mm.
+
 
 
 ##### Make a scatterplot
@@ -57,21 +68,25 @@ problem2_df = tibble(
 problem2_df
 ```
 
+
 ##### Try to take the mean of each variable in the dataframe
 
 ```{r}
 # Mean of vec_sample:
-mean(pull(problem2_df, vec_sample))
+mean_numeric_sample = mean(pull(problem2_df, vec_sample))
 # Mean of vec_logical:
-mean(pull(problem2_df, vec_logical))
+mean_numeric_logical = mean(pull(problem2_df, vec_logical))
 # Mean of vec_char:
-mean(pull(problem2_df, vec_char))
+mean_numeric_char = mean(pull(problem2_df, vec_char))
 # Mean of vec_char:
-mean(pull(problem2_df, vec_factor))
+mean_numeric_factor = mean(pull(problem2_df, vec_factor))
 ```
+*   The result shows that we can successfully calculate the mean of random sample factor(mean `r mean_numeric_sample`) and logical vector(mean `r mean_numeric_logical`). However, for character vector and factor vector, the result will be N/A. 
+
+
 
 ##### Applies as.numeric function to the logical, characther and factor variables
-```{r, eval=FALSE}
+```{r, results='hide'}
 # Apply for vec_logical and compute mean
    numeric_logical = as.numeric(problem2_df$vec_logical)
 # Apply for vec_char and compute mean
@@ -79,11 +94,16 @@ mean(pull(problem2_df, vec_factor))
 # Apply for vec_factor and compute mean
    numeric_factor = as.numeric(problem2_df$vec_factor)  
 # Mean of vec_logical:
-   mean(numeric_logical)
+   mean_numeric_logical_new = mean(numeric_logical)
 # Mean of vec_char:
-   mean(numeric_char)
+   mean_numeric_char_new = mean(numeric_char)
 # Mean of vec_char:
-   mean(numeric_factor)
+   mean_numeric_factor_new = mean(numeric_factor)
 ```
-
+*   After converting the variable, we can find that:
+   1. The character vector has been changed into a numeric variable from 0 to 9
+   2. The factor vector has been changed into a numeric variable with 3 different levels as 1 to 3
+   3. The logical vector has also been changed into a numeric variable with two levels as 0 or 1
+*   The mean can be calculated for all of three variables after converting.This shows that character and factor vectors including characters cannot be calculated directly. Whereas, for logical factors, it seems with no differences before and after.
+*   I think it is because mean function cannot be applied to vectors containing characters. But because logical vector can be translated to 0(FALSE) or 1(TRUE), that can be calculated.
 
