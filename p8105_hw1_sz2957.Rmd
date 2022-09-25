@@ -4,34 +4,34 @@ author: Suning Zhao
 Date: September 2022
 output: github_document
 ---
-
-# Problem 1
-##### Download the package containing the penguins dataset and load:
-
+# Loading packages
 ```{r}
 # Set echo = TRUE as default
 knitr::opts_chunk$set(echo = TRUE)
 # Open the library of tidyverse
 library(tidyverse)
+```
+
+# Problem 1
+##### Download the package containing the penguins dataset and load:
+
+```{r}
 # Load the datafile
 data("penguins", package = "palmerpenguins")
 # Demonstrate the dataset
 head(penguins)
+# Describe and Summary the dataset
+names(penguins)
+summary(penguins)
 # Compute row, column and mean flipper length
 row_penguins = nrow(penguins)
 col_penguins = ncol(penguins)
 mean_flipper_length = mean(pull(penguins, flipper_length_mm), na.rm = TRUE)
-# Compute mean for bill_length_mm, bill_depth_mm
-mean_bill_length_mm = mean(pull(penguins, bill_length_mm), na.rm = TRUE)
-mean_bill_depth_mm = mean(pull(penguins, bill_depth_mm), na.rm = TRUE)
-# Compute mean for body_mass_g, year
-mean_body_mass_g = mean(pull(penguins, body_mass_g), na.rm = TRUE)
-mean_year = mean(pull(penguins, year), na.rm = TRUE)
 ```
 
 ##### Write a short description of penguins dataset
 
-*   In _penguins_ dataset, there are 8 variables, including species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex and year. Sex is a factor vectors including 2 different values. Species and island are two factor vectors including 3 different values. Bill_length_mm(mean `r mean_bill_length_mm`), bill_depth_mm(mean `r mean_bill_depth_mm`) are two numeric variables. Flipper_length_mm(mean `r  mean_flipper_length`), body_mass_g(mean `r mean_body_mass_g`) and year(mean `r mean_year`) are three int variables.
+*   In _penguins_ dataset, there are 8 variables, including species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex and year. Sex is a factor vectors including 2 different values. Species and island are two factor vectors including 3 different values. Bill_length_mm(mean 43.92, median 44.45, NA 2), bill_depth_mm(mean 17.15, median 17.30, NA 2) are two numeric variables. Flipper_length_mm(mean 200.9, median 197.0, NA 2), body_mass_g(mean 4202, median 4050, NA 2) and year(min 2007, max 2009) are three int variables.
 
 
 *   The size of _penguins_ is `r row_penguins` rows and `r col_penguins` lines.
@@ -71,7 +71,7 @@ problem2_df
 
 ##### Try to take the mean of each variable in the dataframe
 
-```{r}
+```{r, warning=FALSE}
 # Mean of vec_sample:
 mean_numeric_sample = mean(pull(problem2_df, vec_sample))
 mean_numeric_sample
