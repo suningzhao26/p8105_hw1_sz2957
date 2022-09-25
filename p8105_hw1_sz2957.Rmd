@@ -74,12 +74,16 @@ problem2_df
 ```{r}
 # Mean of vec_sample:
 mean_numeric_sample = mean(pull(problem2_df, vec_sample))
+mean_numeric_sample
 # Mean of vec_logical:
 mean_numeric_logical = mean(pull(problem2_df, vec_logical))
+mean_numeric_logical
 # Mean of vec_char:
 mean_numeric_char = mean(pull(problem2_df, vec_char))
+mean_numeric_char 
 # Mean of vec_char:
 mean_numeric_factor = mean(pull(problem2_df, vec_factor))
+mean_numeric_factor
 ```
 *   The result shows that we can successfully calculate the mean of random sample factor(mean `r mean_numeric_sample`) and logical vector(mean `r mean_numeric_logical`). However, for character vector and factor vector, the result will be N/A. 
 
